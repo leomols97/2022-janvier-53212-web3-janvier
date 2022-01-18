@@ -19,4 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/discussions/{threadId}', [ DiscussionCtrl::class, 'discussion' ]);
+Route::post('/discussions/{threadId}', [ DiscussionCtrl::class, 'discussion' ]);
