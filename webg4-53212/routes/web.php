@@ -17,4 +17,5 @@ use App\Http\Controllers\DiscussionCtrl;
 
 
 Route::get('/', [ DiscussionCtrl::class, 'index' ]);
-
+Route::get('/discussions', [ DiscussionCtrl::class, 'discussions' ]);
+Route::get('/discussions/{threadId}', [ DiscussionCtrl::class, 'discussion' ]);

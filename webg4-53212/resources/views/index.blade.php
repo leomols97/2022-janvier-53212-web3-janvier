@@ -14,7 +14,7 @@
             </tr>
             @foreach ($discussions as $discussion)
                 <tr>
-                    <td><a onclick="update({{$discussion['id']}})">{{ $discussion['title'] }}</td>
+                    <td><a href="/discussions/{{ $discussion['id'] }}">{{ $discussion['title'] }}</td>
                 </tr>
             @endforeach
         </table>

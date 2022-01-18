@@ -2,18 +2,13 @@
 namespace App\Models;
 use \Illuminate\Support\Facades\DB;
 use PDO;
-
 class Discussion {
     public static function getDiscussion( $id ) {
         $pdo = DB::getPdo();
-        $discussion = $pdo->query( "SELECT Thread.id, Thread.title, Message.text
+        $discussion = $pdo->query( "SELECT Thread.id, Thread.title, Message.text, Message.author, Message.date
                                     FROM Thread
                                     JOIN Message ON Thread.id = Message.threadId WHERE Thread.id = $id" )
-        ->fetch();
-        $commits = ( Discussion::getDiscussion( $id ) );
-        array_push( $discussion, $commits );
-        $discussion[ 'commits' ] = $discussion[ 2 ];
-        unset( $discussion[ 2 ] );
+        ->fetchAll();
         return $discussion;
     }
 
@@ -26,21 +21,21 @@ class Discussion {
 
     public static function getAllDiscussions() {
         $pdo = DB::getPdo();
-        $repositories = $pdo->query( "SELECT Thread.id, Thread.title, Message.text
+        $discussions = $pdo->query( "SELECT Thread.id, Thread.title, Message.text, Message.author, Message.date
                                     FROM Thread
                                     JOIN Message ON Thread.id = Message.threadId" )
         ->fetchAll();
 
-        return $repositories;
+        return $discussions;
     }
 
     public static function getAllDiscussionsTitle() {
         $pdo = DB::getPdo();
-        $repositories = $pdo->query( "SELECT Thread.id, Thread.title
+        $discussions = $pdo->query( "SELECT Thread.id, Thread.title
                                     FROM Thread" )
         ->fetchAll();
 
-        return $repositories;
+        return $discussions;
     }
 }
 
